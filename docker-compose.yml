@@ -1,6 +1,6 @@
 services:
   dijkstra:
-    image: tttriplicate/dijkstra:simple
+    image: tttriplicate/dijkstra:problem-sets
     links:
       - mysql
     depends_on:

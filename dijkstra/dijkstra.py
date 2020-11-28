@@ -31,8 +31,8 @@ check or recheck.
     cursor = conn.cursor()
     cursor.execute("SELECT weight, destination FROM edges WHERE source=%s", (start,))
     for result in cursor:
-        if values[result[1]] > (values[start] + result[0]) or values[result[1]] == 0: 
-            values.update({result[1] : (values[start] + result[0])})
+        if values[result[1]][1] > (values[start][1] + result[0]) or values[result[1]][1] == -1: 
+            values.update({result[1] : ( (values[start][0] + result[1]), (values[start][1] + result[0]))})
             pending.append(result[1])
 
 
@@ -43,13 +43,14 @@ def nodesMap():
     cursor.execute("SELECT node_id from nodes ORDER BY node_id asc")
     nodes = {}
     for result in cursor:
-        nodes.update({result[0] : 0})
+        nodes.update({result[0] : ('a', -1)})
     
     return nodes
 
 values = nodesMap()
 pending = deque()
-pending.append(0)
+pending.append('a')
+values.update({'a' : ('a',0)})
 
 while len(pending) > 0:
     print(values)
