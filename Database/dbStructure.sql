@@ -18,9 +18,7 @@ VALUES
     ('e'), 
     ('f'), 
     ('g'), 
-    ('h'),
-    ('i');
-
+    ('h');
 
 CREATE TABLE edges(
     source char,

@@ -78,6 +78,7 @@ def problem11():
 def problem13():
     conn = connect()
     cursor = conn.cursor()
+    cursor.execute("INSERT INTO nodes VALUES('i')")
     cursor.execute("""
     INSERT INTO edges(source, destination, weight) 
     VALUES
