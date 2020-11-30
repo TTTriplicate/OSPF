@@ -43,7 +43,7 @@ def nodesMap():
     cursor.execute("SELECT node_id from nodes ORDER BY node_id asc")
     nodes = {}
     for result in cursor:
-        nodes.update({result[0] : ('a', -1)})
+        nodes.update({result[0] : ('', -1)})
     
     return nodes
 def clear():
