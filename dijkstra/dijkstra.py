@@ -20,7 +20,7 @@ def connect():
 
     return conn
 
-def routingTable(start, values, pending):
+def dijkstra(start, values, pending):
     '''
 Given a node to check paths from, a set of current path values, and the queue of pending
 nodes to check, check the nodes adjacent to the current node to see if a path formed here
@@ -110,5 +110,5 @@ for setup in problems:
 
     while len(pending) > 0:
         print(values)
-        routingTable(pending.popleft(), values, pending)
+        dijkstra(pending.popleft(), values, pending)
     print("Problem complete")
