@@ -46,13 +46,68 @@ def nodesMap():
         nodes.update({result[0] : ('a', -1)})
     
     return nodes
+def clear():
+    conn = connect()
+    cursor = conn.cursor()
+    cursor.execute("DELETE from edges")
+    conn.commit()
 
-values = nodesMap()
-pending = deque()
-pending.append('a')
-values.update({'a' : ('a',0)})
+def problem11():
+    conn = connect()
+    cursor = conn.cursor()
+    cursor.execute(
+    """INSERT INTO edges(source, destination, weight) 
+    VALUES
+    ('a', 'h', 10),
+    ('a', 'b', 1),
+    ('a', 'g', 6),
+    ('b', 'h', 2),
+    ('b', 'd', 1),
+    ('c', 'd', 4),
+    ('c', 'e', 1),
+    ('d', 'e', 3),
+    ('d', 'f', 4),
+    ('e', 'f', 5),
+    ('g', 'c', 2),
+    ('g', 'd', 8),
+    ('g', 'b', 2),
+    ('h', 'f', 5)""")
+    conn.commit()
 
-while len(pending) > 0:
-    print(values)
-    routingTable(pending.popleft(), values, pending)
 
+def problem13():
+    conn = connect()
+    cursor = conn.cursor()
+    cursor.execute("""
+    INSERT INTO edges(source, destination, weight) 
+    VALUES
+    ('a', 'h', 2),
+    ('a', 'f', 4),
+    ('f', 'h', 3),
+    ('f', 'b', 5),
+    ('h', 'g', 2),
+    ('h', 'c', 3),
+    ('b', 'h', 1),
+    ('g', 'd', 1),
+    ('d', 'e', 3),
+    ('i', 'd', 1),
+    ('c', 'b', 15),
+    ('c', 'i', 2),
+    ('e', 'b', 1)
+    """)
+    conn.commit()
+
+
+problems = [problem11, problem13]
+for setup in problems:
+    clear()
+    setup()
+    values = nodesMap()
+    pending = deque()
+    pending.append('a')
+    values.update({'a' : ('a',0)})
+
+    while len(pending) > 0:
+        print(values)
+        routingTable(pending.popleft(), values, pending)
+    print("Problem complete")
